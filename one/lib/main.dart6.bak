@@ -1,0 +1,120 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'TabBar',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // Try running your application with "flutter run". You'll see the
+        // application has a blue toolbar. Then, without quitting the app, try
+        // changing the primarySwatch below to Colors.green and then invoke
+        // "hot reload" (press "r" in the console where you ran "flutter run",
+        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // Notice that the counter didn't reset back to zero; the application
+        // is not restarted.
+        primarySwatch: Colors.blue,
+      ),
+      home: LayouDemo(),
+    );
+  }
+}
+
+/**
+ * Container示例
+ */
+class LayouDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    Widget container = Container(
+      //添加装饰效果
+      decoration: BoxDecoration(
+        color: Colors.grey
+      ),
+      //子元素指定为一个垂直水平嵌套布局组件
+      child: Column(
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Expanded(child: Container(
+                width: 150.0,
+                height: 150.0,
+                //添加边框样式
+                decoration: BoxDecoration(
+                  //上下左右边框设置为宽度10 颜色为灰蓝色
+                    border: Border.all(width: 10.0,color: Colors.blueGrey),
+                    //设置上下左右边框弧度设置为8.0
+                    borderRadius: BorderRadius.all(const Radius.circular(8.0))
+                ),
+                //上下左右增加边距
+                margin: EdgeInsets.all(4.0),
+                // 添加图片
+                child: Image.asset('images/a.jpg'),
+              )),
+              Expanded(
+                child: Container(
+                  height: 150.0,
+                  width: 150.0,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          width: 10.0,
+                          color: Colors.blueGrey
+                      ),
+                      borderRadius: BorderRadius.all(const Radius.circular(8.0))
+                  ),
+                  margin: const EdgeInsets.all(4.0),
+                  child: Image.asset("images/b.jpg"),
+                ),
+              )
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Expanded(
+                  child: Container(
+                    width: 150.0,
+                    height: 150.0,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 10.0,
+                        color: Colors.blueGrey
+                      ),
+                      borderRadius: BorderRadius.all(const Radius.circular(8.0)),
+                    ),
+                    margin: const EdgeInsets.all(4.0),
+                    child:Image.asset("images/c.jpg"),
+                  )
+              ),
+              Expanded(child: Container(
+                width: 150.0,
+                height: 150.0,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 10.0,
+                    color: Colors.blueGrey
+                  ),
+                  borderRadius: BorderRadius.all(const Radius.circular(8.0))
+                ),
+                margin: const EdgeInsets.all(4.0),
+                child: Image.asset("images/code.png"),
+              ))
+            ],
+          )
+        ],
+      ),
+    );
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Container布局容器示例"),
+      ),
+      body: container,
+    );
+  }
+}
+

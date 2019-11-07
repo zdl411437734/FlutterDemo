@@ -1,0 +1,107 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'TabBar',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // Try running your application with "flutter run". You'll see the
+        // application has a blue toolbar. Then, without quitting the app, try
+        // changing the primarySwatch below to Colors.green and then invoke
+        // "hot reload" (press "r" in the console where you ran "flutter run",
+        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // Notice that the counter didn't reset back to zero; the application
+        // is not restarted.
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _MyHomePageState();
+  }
+
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+
+  final List<ItemView> myItemViews = <ItemView>[
+    ItemView(title: "自驾",icon: Icons.directions_car),
+    ItemView(title: "自行车",icon: Icons.directions_bike),
+    ItemView(title: "轮船",icon: Icons.directions_boat),
+    ItemView(title: "公交车",icon: Icons.directions_bus),
+    ItemView(title: "火车",icon: Icons.directions_transit),
+    ItemView(title: "步行",icon: Icons.directions_walk),
+    ItemView(title: "步行3",icon: Icons.directions_walk),
+    ItemView(title: "步行1",icon: Icons.directions_walk),
+    ItemView(title: "步行2",icon: Icons.directions_railway),
+  ];
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return DefaultTabController(
+        length: myItemViews.length,
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: TabBar(
+                isScrollable: true,
+                tabs:  myItemViews.map((ItemView item){
+                  return Tab(text: item.title,icon: Icon(item.icon),);
+                }).toList()
+            ),
+          ),
+          body: TabBarView(
+              children: myItemViews.map((ItemView item){
+                return Padding(
+                    padding: const EdgeInsets.all(16.0),
+                  child: SelectedView(item: item,),
+                );
+              }).toList()
+          ),
+        ));
+  }
+}
+
+class ItemView{
+  var title;
+  var icon;
+  ItemView({this.title,this.icon});
+}
+
+class SelectedView extends StatelessWidget{
+  final ItemView item;
+
+  SelectedView({Key key,this.item}) : super(key : key);
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    final TextStyle textStyle = Theme.of(context).textTheme.display1;
+
+    return Card(
+      color: Colors.white,
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Icon(item.icon,size: 128.0,color: textStyle.color,),
+            Text(item.title,style: textStyle,)
+          ],
+        ),
+      ),
+    );
+  }
+
+}
